@@ -13,10 +13,11 @@ class ServiceProvider{
     class func getApod(date : String , completion : @escaping (Result<NasaApodResponseModel,Error>) -> Void){
         
         ServiceManager.shared.sendRequest(request: NasaApodRequestModel(date: date)) { (result) in
-            completion(result)
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
-        
-        
+    
     }
     
 }

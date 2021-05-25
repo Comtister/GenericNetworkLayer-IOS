@@ -19,7 +19,13 @@ class ServiceManager{
         URLSession.shared.dataTask(with: request.requestModel()!) { (data, response, error) in
             
             var responseModel = ResponseModel<T>(data: data!)
-            print(responseModel.dataObject)
+           
+                if let object = responseModel.dataObject{
+                    completion(Result.success(object))
+                }else{
+                    completion(Result.failure(error!))
+                }
+    
             
         }.resume()
         
